@@ -4,7 +4,7 @@ on:
     push:
         branches:
             - main
-        patchs:
+        paths:
             - 10_infra/**
             - github/workflows/**
     workflow_dispatch:
