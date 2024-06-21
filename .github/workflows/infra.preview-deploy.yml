@@ -15,7 +15,7 @@ permissions:
 
 jobs:
     preview:
-        name: "preview"
+        name: "Preview"
         runs-on: ubuntu-latest
         steps:
             - run: |
