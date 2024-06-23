@@ -50,10 +50,11 @@ jobs:
                 terraform validate  -no-color
             - name: Terraform plan
               run: |
-                -var 'project=${{ env.TF_PROJECT }}' \
-                -var 'environment=${{ env.TF_ENVIRONMENT }}' \
-                -var 'password=${{ secrets.MYSQL_PASSWORD }}' \
-                -var 'username=${{ secrets.MYSQL_USERNAME }}' \
-                -input=false \
-                -no-color \
-                -detailed-exitcode
+                terraform plan \
+                    -var 'project=${{ env.TF_PROJECT }}' \
+                    -var 'environment=${{ env.TF_ENVIRONMENT }}' \
+                    -var 'password=${{ secrets.MYSQL_PASSWORD }}' \
+                    -var 'username=${{ secrets.MYSQL_USERNAME }}' \
+                    -input=false \
+                    -no-color \
+                    -detailed-exitcode
