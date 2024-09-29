@@ -1,0 +1,18 @@
+name: "get s3 object"
+
+on:
+  push
+
+jobs:
+  gets3object:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: 'us-east-1'
+          role-to-assume: 'arn:aws:iam::722015880532:role/GitHubActionsRoll'
+
+      - run: aws s3 ls s3://oidc-handson-bucket
