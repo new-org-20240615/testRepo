@@ -43,8 +43,7 @@ jobs:
             --document-name "AWS-RunShellScript" \
             --comment "test" \
             --parameters 'commands=[
-              "bash -c \"touch ssm-send-command-test.txt\""
+              "sudo su - ec2-user -c \"cd /var/www/testRepo && git pull\""
             ]' \
-            --output json)
           export COMMAND_ID=$(echo $RESPONSE | jq .Command.CommandId | sed s/\"//g)
           echo "commandId ${COMMAND_ID}"
