@@ -23,13 +23,10 @@ jobs:
 
       - name: ssm send-command
         run: |
-          export RESPONSE=$(aws ssm send-command \
-            --instance-ids ${{ secrets.TARGET_1 }} \
+          RESPONSE=$(aws ssm send-command \
+            --instance-ids ${{ secrets.INSTANCE_ID }} \
             --document-name "AWS-RunShellScript" \
-            --parameters 'commands=[
-              "sudo su - ec2-user -c \"cd /var/www/testRepo && git pull\""
-            ]' \
-            )
-
+            --parameters '{"commands": ["sudo su - ec2-user -c \"cd /var/www/testRepo && git pull\""]}')
+          echo "$RESPONSE"
       - name: deployed message
-        run: echo 'INSTANCE_ID=${{ secrets.TARGET_1 }}へデプロイが完了'
+        run: echo 'デプロイ完了'
