@@ -42,8 +42,8 @@ jobs:
             --instance-ids $INSTANCE_ID \
             --document-name "AWS-RunShellScript" \
             --comment "test" \
-            --parameters commands='commands=[
-              "bash -c \"touch ssm-send-command-test.txt\"
+            --parameters 'commands=[
+              "bash -c \"touch ssm-send-command-test.txt\""
             ]' \
             --output json)
           export COMMAND_ID=$(echo $RESPONSE | jq .Command.CommandId | sed s/\"//g)
