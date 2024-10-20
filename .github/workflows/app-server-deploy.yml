@@ -4,43 +4,33 @@ on:
   workflow_dispatch:
     inputs:
       target:'選択'
-      required: true
-      type: choice
-      options:
-        - "target1"
-        - "target2"
+        required: true
+        type: choice
+        options:
+          - "target1"
+          - "target2"
 
-  permissions:
-    contents: read
-    id-token: write
-  
-  jobs:
-    deploy:
-      runs-on: ubuntu-latest
+permissions:
+  contents: read
+  id-token: write
 
-    steps:
-      - uses: actions/checkout@v4
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-Credentials@v4
-        with:
-          aws-region: 'ap-northeast-1'
-          role-to-assume: 'arn:aws:iam::722015880532:role/GitHubActionsRoll'
-      
-      - name: set target 1
-      if: github.event.inputs.target == 'target1'
-      run: echo 'INSTANCE_ID=${{ secrets.TARGET_1 }}' >> $GITHUB_ENV
-  
-      - name: set target 2
-      if: github.event.inputs.target == 'target2'
-      run: echo 'INSTANCE_ID=${{ secrets.TARGET_2 }}' >> $GITHUB_ENV
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-      - name: do command
-        run: |
-          export RESPONSE=$(aws ssm send-command \
-            --instance-ids $INSTANCE_ID \
-            --document-name "AWS-RunShellScript" \
-            --comment "test" \
-            --parameters commands=hostname \
-            --output json)
-          export COMMAND_ID=$(echo $RESPONSE | jq .Command.CommandId | sed s/\"//g)
-          echo "commandId ${COMMAND_ID}"
+  steps:
+    - uses: actions/checkout@v4
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-Credentials@v4
+      with:
+        aws-region: 'ap-northeast-1'
+        role-to-assume: 'arn:aws:iam::722015880532:role/GitHubActionsRoll'
+    
+    - name: set target 1
+    if: github.event.inputs.target == 'target1'
+    run: echo 'INSTANCE_ID=${{ secrets.TARGET_1 }}' >> $GITHUB_ENV
+
+    - name: set target 2
+    if: github.event.inputs.target == 'target2'
+    run: echo 'INSTANCE_ID=${{ secrets.TARGET_2 }}' >> $GITHUB_ENV
+
