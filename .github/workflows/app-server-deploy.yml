@@ -45,5 +45,6 @@ jobs:
             --parameters 'commands=[
               "sudo su - ec2-user -c \"cd /var/www/testRepo && git pull\""
             ]' \
+            --output json)
           export COMMAND_ID=$(echo $RESPONSE | jq .Command.CommandId | sed s/\"//g)
           echo "commandId ${COMMAND_ID}"
