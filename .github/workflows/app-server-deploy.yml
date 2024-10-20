@@ -19,19 +19,19 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-  steps:
-    - uses: actions/checkout@v4
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-Credentials@v4
-      with:
-        aws-region: 'ap-northeast-1'
-        role-to-assume: 'arn:aws:iam::722015880532:role/GitHubActionsRoll'
-    
-    - name: set target 1
-    if: github.event.inputs.target == 'target1'
-    run: echo 'INSTANCE_ID=${{ secrets.TARGET_1 }}' >> $GITHUB_ENV
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-Credentials@v4
+        with:
+          aws-region: 'ap-northeast-1'
+          role-to-assume: 'arn:aws:iam::722015880532:role/GitHubActionsRoll'
+      
+      - name: set target 1
+      if: github.event.inputs.target == 'target1'
+      run: echo 'INSTANCE_ID=${{ secrets.TARGET_1 }}' >> $GITHUB_ENV
 
-    - name: set target 2
-    if: github.event.inputs.target == 'target2'
-    run: echo 'INSTANCE_ID=${{ secrets.TARGET_2 }}' >> $GITHUB_ENV
+      - name: set target 2
+      if: github.event.inputs.target == 'target2'
+      run: echo 'INSTANCE_ID=${{ secrets.TARGET_2 }}' >> $GITHUB_ENV
 
