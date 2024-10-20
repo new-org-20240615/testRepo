@@ -3,7 +3,8 @@ name: app-server-deploy
 on:
   workflow_dispatch:
     inputs:
-      target:'選択'
+      target:
+        description: '選択'
         required: true
         type: choice
         options:
