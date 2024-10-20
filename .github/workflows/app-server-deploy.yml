@@ -42,7 +42,6 @@ jobs:
             --instance-ids $INSTANCE_ID \
             --document-name "AWS-RunShellScript" \
             --comment "test" \
-            # --parameters commands=hostname \
             --parameters commands='commands=[
               "bash -c \"touch ssm-send-command-test.txt\""
             ]' \
