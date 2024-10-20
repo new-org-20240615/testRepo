@@ -20,10 +20,6 @@ jobs:
         with:
           aws-region: 'ap-northeast-1'
           role-to-assume: 'arn:aws:iam::722015880532:role/GitHubActionsRoll'
-      
-      - name: set target 1
-        if: github.event.inputs.target == 'target1'
-        run: echo 'INSTANCE_ID=${{ secrets.TARGET_1 }}' >> $GITHUB_ENV
 
       - name: ssm send-command
         run: |
@@ -34,4 +30,6 @@ jobs:
               "sudo su - ec2-user -c \"cd /var/www/testRepo && git pull\""
             ]' \
             )
-          echo 'INSTANCE_ID=${{ secrets.TARGET_1 }}へデプロイが完了'
+
+      - name: deployed message
+        run: echo 'INSTANCE_ID=${{ secrets.TARGET_1 }}へデプロイが完了'
