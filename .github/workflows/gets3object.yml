@@ -1,7 +1,8 @@
 name: "get s3 object"
 
 on:
-  push
+  - push
+  - workflow_dispatch
 
 jobs:
   gets3object:
