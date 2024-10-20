@@ -37,12 +37,12 @@ jobs:
         run: echo 'INSTANCE_ID=${{ secrets.TARGET_2 }}' >> $GITHUB_ENV
 
       - name: do command
-      run: |
-        export RESPONSE=$(aws ssm send-command \
-          --instance-ids $INSTANCE_ID \
-          --document-name "AWS-RunShellScript" \
-          --comment "test" \
-          --parameters commands=hostname \
-          --output json)
-        export COMMAND_ID=$(echo $RESPONSE | jq .Command.CommandId | sed s/\"//g)
-        echo "commandId ${COMMAND_ID}"
+        run: |
+          export RESPONSE=$(aws ssm send-command \
+            --instance-ids $INSTANCE_ID \
+            --document-name "AWS-RunShellScript" \
+            --comment "test" \
+            --parameters commands=hostname \
+            --output json)
+          export COMMAND_ID=$(echo $RESPONSE | jq .Command.CommandId | sed s/\"//g)
+          echo "commandId ${COMMAND_ID}"
