@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  ExistingSecurityGroups:
+    Type: List<AWS::EC2::SecurityGroup::Id>
+  ExistingVPC:
+    Type: AWS::EC2::VPC::Id
+    Description: The VPC ID that includes the security groups in the ExistingSecurityGroups parameter.
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - m1.small
