@@ -1,13 +1,29 @@
 AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Bad SubnetRouteTableAssociation'
+
 Parameters:
-  ExistingSecurityGroups:
-    Type: List<AWS::EC2::SecurityGroup::Id>
-  ExistingVPC:
-    Type: AWS::EC2::VPC::Id
-    Description: The VPC ID that includes the security groups in the ExistingSecurityGroups parameter.
-  InstanceType:
+  PublicRouteTable:
     Type: String
-    Default: t2.micro
-    AllowedValues:
-      - t2.micro
-      - m1.small
+
+  PrivateRouteTable:
+    Type: String
+
+  PublicSubnet01:
+    Type: String
+
+  PrivateSubnet01:
+    Type: String
+
+
+Resources:
+  PublicSubnetRouteTableAssociation1:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        RouteTableId: {Ref: PublicRouteTable}
+        SubnetId: {Ref: PublicSubnet01}
+
+  PrivateSubnetRouteTableAssociation1:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        RouteTableId: {Ref: PrivateRouteTable}
+        SubnetId: {Ref: PublicSubnet01}
