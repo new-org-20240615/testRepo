@@ -1,7 +1,7 @@
 name: app-server-deploy
 
 on:
-  push:
+  # push:
   workflow_dispatch:
 
 permissions:
